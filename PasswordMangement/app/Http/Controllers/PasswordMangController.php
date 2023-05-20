@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PasswordMang;
 use Illuminate\Http\Request;
+use Defuse\Crypto\Crypto;
+
 
 class PasswordMangController extends Controller
 {
@@ -12,7 +14,7 @@ class PasswordMangController extends Controller
      */
     public function index()
     {
-        
+        return view('passwordmang.index');
     }
 
     /**
@@ -28,7 +30,9 @@ class PasswordMangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('kk');
+         $encryptionKey = config('app.key');
+
     }
 
     /**

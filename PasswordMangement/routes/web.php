@@ -25,4 +25,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+})->group(function () {
+    Route::get('/passwordmang.index', [App\Http\Controllers\PasswordMangController::class, 'index'])->name('passwordmang.index');
+    Route::post('/store', [App\Http\Controllers\PasswordMangController::class, 'store'])->name('store');
+  
+
 });
