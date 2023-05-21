@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PasswordMang;
 use Illuminate\Http\Request;
 use Defuse\Crypto\Crypto;
+use Illuminate\Support\Facades\Crypt;
+
 
 
 class PasswordMangController extends Controller
@@ -30,8 +32,24 @@ class PasswordMangController extends Controller
      */
     public function store(Request $request)
     {
-        dd('kk');
-         $encryptionKey = config('app.key');
+        $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+       
+        //  $encryptionKey = config('app.key');
+         $encryptedname = Crypt::encryptString($request->name);
+         $encryptedpass = Crypt::encryptString($request->password);
+        //  $decryptedData = Crypt::decryptString($encryptedData);
+        //  dd($decryptedData);
+         $store = PasswordMang::create([
+            'name' => $encryptedname,
+            'password' => $encryptedpass,
+           
+        ]);
+        dd('finsh');
+
+        //  dd($encryptionKey);
 
     }
 
@@ -40,7 +58,7 @@ class PasswordMangController extends Controller
      */
     public function show(PasswordMang $passwordMang)
     {
-        //
+        $encrypt = PasswordMang::get();
     }
 
     /**
