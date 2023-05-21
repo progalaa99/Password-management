@@ -36,20 +36,14 @@ class PasswordMangController extends Controller
             'name' => 'required',
             'password' => 'required',
         ]);
-       
-        //  $encryptionKey = config('app.key');
          $encryptedname = Crypt::encryptString($request->name);
          $encryptedpass = Crypt::encryptString($request->password);
-        //  $decryptedData = Crypt::decryptString($encryptedData);
-        //  dd($decryptedData);
          $store = PasswordMang::create([
             'name' => $encryptedname,
             'password' => $encryptedpass,
            
         ]);
         dd('finsh');
-
-        //  dd($encryptionKey);
 
     }
 
@@ -58,7 +52,18 @@ class PasswordMangController extends Controller
      */
     public function show(PasswordMang $passwordMang)
     {
-        $encrypt = PasswordMang::get();
+        $encrypt = PasswordMang::all();
+        $decryptedUsers = $encrypt->map(function ($encrypt) {
+            $decryptedName = Crypt::decryptString($encrypt->name);
+            $decryptedPassword = Crypt::decryptString($encrypt->password);
+            // dd($decryptedPassword);
+            $encrypt->name = $decryptedName;
+            $encrypt->password = $decryptedPassword;
+            // dd($encrypt);
+        
+             return $encrypt;
+        });
+        return $encrypt;
     }
 
     /**
