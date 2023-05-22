@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\CheckSecurity;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +28,16 @@ Route::middleware([
 })->group(function () {
     Route::get('/passwordmang.index', [App\Http\Controllers\PasswordMangController::class, 'index'])->name('passwordmang.index');
     Route::post('/store', [App\Http\Controllers\PasswordMangController::class, 'store'])->name('store');
-    Route::get('/show', [App\Http\Controllers\PasswordMangController::class, 'show'])->name('show');
+    // Route::get('/show', [App\Http\Controllers\PasswordMangController::class, 'show'])->name('show');
     Route::get('/genratepassword', [App\Http\Controllers\PasswordMangController::class, 'genratepassword'])->name('genratepassword');
   
 
 });
 Route::group(['middleware' => ['security']], function () {
+    Route::get('/show', [App\Http\Controllers\PasswordMangController::class, 'show'])->name('show');
    
 });
+
+// Route::get('/', function () {
+//    return 'ok';
+// })->middleware(CheckSecurity::class)->name('security');

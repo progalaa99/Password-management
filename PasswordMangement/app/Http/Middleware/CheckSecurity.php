@@ -14,12 +14,13 @@ class CheckSecurity
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
+    { 
+        // dd('haaaa?');
         $storedIp = $request->session()->get('ip');
         $storedUserAgent = $request->session()->get('user_agent');
         $currentIp = $request->ip();
         $currentUserAgent = $request->userAgent();
-
+        dd($currentUserAgent);
         if ($currentIp !== $storedIp || $currentUserAgent !== $storedUserAgent) {
             // تنبيه أمان للمستخدم
             return redirect()->back()->with('security_alert', 'تم اكتشاف دخول غير مصرح به.');
