@@ -6,6 +6,7 @@ use App\Models\PasswordMang;
 use Illuminate\Http\Request;
 use Defuse\Crypto\Crypto;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 
 
@@ -88,5 +89,12 @@ class PasswordMangController extends Controller
     public function destroy(PasswordMang $passwordMang)
     {
         //
+    }
+
+    public function genratepassword(){
+        $len = 24;
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*<>()'; 
+        $password = Str::random($len, $characters);
+        return $password;
     }
 }

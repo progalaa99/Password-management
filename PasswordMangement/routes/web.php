@@ -29,6 +29,7 @@ Route::middleware([
     Route::get('/passwordmang.index', [App\Http\Controllers\PasswordMangController::class, 'index'])->name('passwordmang.index');
     Route::post('/store', [App\Http\Controllers\PasswordMangController::class, 'store'])->name('store');
     Route::get('/show', [App\Http\Controllers\PasswordMangController::class, 'show'])->name('show');
+    Route::get('/genratepassword', [App\Http\Controllers\PasswordMangController::class, 'genratepassword'])->name('genratepassword');
   
 
 });
