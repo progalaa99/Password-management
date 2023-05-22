@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified','security'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -32,4 +32,7 @@ Route::middleware([
     Route::get('/genratepassword', [App\Http\Controllers\PasswordMangController::class, 'genratepassword'])->name('genratepassword');
   
 
+});
+Route::group(['middleware' => ['security']], function () {
+   
 });
