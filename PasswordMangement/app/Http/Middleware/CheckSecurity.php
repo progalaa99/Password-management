@@ -5,7 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
+use App\Models\Session;
 
 
 class CheckSecurity
@@ -17,21 +18,18 @@ class CheckSecurity
      */
     public function handle(Request $request, Closure $next): Response
     { 
-        // dd('haaaa?');
-        // session()->put('ip', $ip_address);
         
-        // $storedIp = $request->session()->get('ip');
-        $storedUserAgent = $request->session()->get('user_agent');
-        $storedIp = Session::get('ip');
-        dd($storedIp);
-        $allowedIPs = ['192.168.0.1', '192.168.0.2']; // قائمة بالـ IP المصرح بها
+        $allowedIPs = Session::get('ip_address');
+        $allowedIPsArray = $allowedIPs->toArray();
+
+        // $allowedIPsArray = ['192.168.0.1', '192.168.0.2']; // قائمة بالـ IP المصرح بها
 
         $userIP = $request->ip();
-        $currentUserAgent = $request->userAgent();
-        // dd($currentIp);
+        // $currentUserAgent = $request->userAgent();
+        // dd($allowedIPsArray);
 
-        if (!in_array($userIP, $allowedIPs)) {
-            return response('تم اكتشاف دخول غير مصرح به ', 401); // إرجاع رد غير مصرح به
+        if (!in_array($userIP, $allowedIPsArray)) {
+            return response('تم اكتشاف دخول غير مصرح به ', 401); 
         }
         
         return $next($request);
