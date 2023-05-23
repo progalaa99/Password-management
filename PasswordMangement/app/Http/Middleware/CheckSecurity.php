@@ -26,12 +26,13 @@ class CheckSecurity
 
         $userIP = $request->ip();
         // $currentUserAgent = $request->userAgent();
-        // dd($allowedIPsArray);
+        // dd($userIP);
 
-        if (!in_array($userIP, $allowedIPsArray)) {
-            return response('تم اكتشاف دخول غير مصرح به ', 401); 
-        }
+        if (!in_array($userIP, $allowedIPsArray)) 
+            return response('You are safe  '); 
+        else return response('An unauthorized entry has been detected', 401); 
+             
         
-        return $next($request);
+        return $next($request);   
     }
 }
