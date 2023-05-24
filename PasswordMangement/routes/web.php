@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware(['auth'])->name('verified');
+
 Route::middleware([
     'auth:sanctum','verified',
     config('jetstream.auth_session'),
@@ -37,6 +41,10 @@ Route::group(['middleware' => ['security']], function () {
     Route::get('/show', [App\Http\Controllers\PasswordMangController::class, 'show'])->name('show');
    
 });
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware(['auth'])->name('verification.notice');
+
 
 // Route::get('/', function () {
 //    return 'ok';
