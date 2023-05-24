@@ -18,9 +18,9 @@ Route::get('/', function () {
 });
 
 Route::middleware([
-    'auth:sanctum',
+    'auth:sanctum','verified',
     config('jetstream.auth_session'),
-    'verified'
+    
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
