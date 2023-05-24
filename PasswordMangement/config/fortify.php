@@ -141,6 +141,7 @@ return [
             'confirm' => true,
             'confirmPassword' => true,
             'emailVerification' => true,
+            // 'twoFactorAuthentication' => true,
             // 'window' => 0,
         ]),
     ],

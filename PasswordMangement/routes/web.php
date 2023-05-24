@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware(['auth'])->name('verified');
+})->middleware(['auth'])->name('verification.notice');
 
 Route::middleware([
     'auth:sanctum','verified',

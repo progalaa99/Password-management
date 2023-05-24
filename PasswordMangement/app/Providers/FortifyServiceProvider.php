@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use PragmaRX\Google2FAQRCode\Google2FA;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,10 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // $google2fa = new Google2FA();
+        // $secretKey = $google2fa->generateSecretKey();
+        // $user->two_factor_secret = $secretKey;
+        // $user->save();
     }
 
     /**
